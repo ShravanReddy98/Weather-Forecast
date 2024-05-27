@@ -19,7 +19,7 @@ const PORT = 3000;
 //get your api key or generate .
 //create a .env file 
 //and ADD data : API_KEY = < YOUR Api Key >
-// example data :API_KEY = 3a31399b8040hd744c7a7fb1894f55b
+// example data :API_KEY = 3a31399b5150hd744c7141ahsbd1894f55b
 const API_KEY = process.env.API_KEY;
 const celcius = "metric";
 
