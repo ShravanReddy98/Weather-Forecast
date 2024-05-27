@@ -13,7 +13,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = 10000;
 
 // create an account on http://www.openweathermap.org
 //get your api key or generate .
