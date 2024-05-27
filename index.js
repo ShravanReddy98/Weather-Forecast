@@ -17,7 +17,7 @@ const app = express();
 const PORT = 5500;
 
 // Get API key from .env
-const API_KEY = process.env.API_KEY;
+const API_KEY = 3b31392b088040f744c7a7fb1894f55b;
 const celcius = "metric";
 
 // Middleware setup
