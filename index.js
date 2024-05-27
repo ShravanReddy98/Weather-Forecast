@@ -1,10 +1,11 @@
-import express from "express";
-import axios from "axios";
-import bodyParser from "body-parser";
-import session from "express-session";
-import path from "path";
-import { fileURLToPath } from "url";
-import dotenv from "dotenv";
+import express from 'express';
+import axios from 'axios';
+import bodyParser from 'body-parser';
+import session from 'express-session';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+import open from 'open'; // Import the open package
 
 // Set up __dirname
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -13,32 +14,28 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config();
 
 const app = express();
-const PORT = 10000;
+const PORT = 5500;
 
-// create an account on http://www.openweathermap.org
-//get your api key or generate .
-//create a .env file 
-//and ADD data : API_KEY = < YOUR Api Key >
-// example data :API_KEY = 3a31399b5150hd744c7141ahsbd1894f55b
+// Get API key from .env
 const API_KEY = process.env.API_KEY;
 const celcius = "metric";
 
-app.use(bodyParser.json()); // Middleware to parse JSON bodies
+// Middleware setup
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// Middleware to handle sessions
-app.use(
-  session({
-    secret: "your-secret-key",
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+app.use(session({
+  secret: "your-secret-key",
+  resave: false,
+  saveUninitialized: true,
+}));
 
 // Serve static files from the 'public' directory
 app.use(express.static("public"));
 
-// Define a custom middleware to set the correct MIME type for CSS files
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
+
+// Custom middleware for CSS MIME type
 app.use((req, res, next) => {
   if (req.url.endsWith(".css")) {
     res.setHeader("Content-Type", "text/css");
@@ -46,11 +43,13 @@ app.use((req, res, next) => {
   next();
 });
 
+// Route to serve index.html
 app.get("/", (req, res) => {
   console.log(req.socket.remoteAddress);
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+// Route to handle /forecast and render index.ejs
 app.get("/forecast", async (req, res) => {
   try {
     const params = req.session.params || {
@@ -69,12 +68,10 @@ app.get("/forecast", async (req, res) => {
   }
 });
 
+// Other routes to handle current location and city-based forecast
 app.post("/curr", (req, res) => {
-  // Store the coordinates in the session
   req.session.lat = req.body.lat;
   req.session.lon = req.body.lon;
-
-  // Redirect to the GET request handler
   res.redirect("/curr");
 });
 
@@ -91,13 +88,7 @@ app.get("/curr", async (req, res) => {
 
 app.post("/city", (req, res) => {
   const { city, state, countryCode } = req.body.params;
-  const q =
-    state && countryCode
-      ? `${city},${state},${countryCode}`
-      : state
-      ? `${city},${state}`
-      : city;
-
+  const q = state && countryCode ? `${city},${state},${countryCode}` : state ? `${city},${state}` : city;
   req.session.params = { q, appid: API_KEY, units: celcius };
   res.redirect("/city");
 });
@@ -112,4 +103,5 @@ app.get("/index", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server is Running at port:${PORT}.`);
+  open(`http://localhost:${PORT}`); // Open the browser to the specified URL
 });
