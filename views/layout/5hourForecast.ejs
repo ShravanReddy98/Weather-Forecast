@@ -1,0 +1,30 @@
+<div class="hourly_weather">
+  <header>
+    <img src="./images/clock.png" alt="O" width="17" height="17" />
+    <pre></pre>
+    <span> 24-HOURS FORECAST </span>
+  </header>
+  <hr />
+  <div class="weather_forecast">
+    <% elements=data.list; %> <% for(let i=0;i<8;i++){%>
+
+    <div class="weather_call">
+      <% const time = new Date(elements[i].dt_txt) %>
+      <div class="weather_time">
+        <%  if(i>0) { %> <%= time.getHours() %>:00
+        <% }else if(i===0) { %><%= "Now" %><% } %>
+      </div>
+      <div class="weather_temp">
+        <%= Math.floor(elements[i].main.temp) %><span>°</span>
+      </div>
+
+      <% let weather = elements[i].weather[0]; %>
+      <img
+        src="http://openweathermap.org/img/wn/<%= weather.icon %>@2x.png"
+        alt="<%= weather.description %>"
+      />
+    </div>
+
+    <% } %>
+  </div>
+</div>

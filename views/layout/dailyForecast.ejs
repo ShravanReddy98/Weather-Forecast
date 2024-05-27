@@ -1,0 +1,53 @@
+<div class="daily_weather">
+  <header>
+    <img src="images/calender.png" alt="D" width="17" height="17" />
+    <pre> </pre>
+    <span> 5-DAYS FORECAST </span>
+  </header>
+  <hr />
+  <div class="weather_forecast">
+    <% const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed','Thu','Fri', 'Sat']; %> <%
+    element=data.list[0] %> <% let date = new Date(element.dt_txt) %> <% let
+    hours=date.getHours(); %> <% let temperature=element.main.temp %> <% let
+    weatherType=element.weather[0].main %>
+
+    <div class="weather_call">
+      <div class="weather_day">Today</div>
+      <div class="weather_date">
+        <%= date.getDate() %> / <%= date.getMonth()+1 %>
+      </div>
+      <div class="weather_temp">
+        <%= Math.floor(temperature) %><span>°</span>
+      </div>
+
+      <% let weather = element.weather[0]; %> 
+      <img
+        src="http://openweathermap.org/img/wn/<%= weather.icon %>@2x.png"
+        alt="<%= weather.description %>"
+      />
+    </div>
+
+    <% data.list.forEach(element => { %> <% date = new Date(element.dt_txt) %>
+    <% hours=date.getHours(); %> <% temperature=element.main.temp %> <%
+    weatherType=element.weather[0].main %> <% if(hours===0){ %>
+    <div class="weather_call">
+      <div class="weather_day">
+        <% const currentDayOfWeek = daysOfWeek[date.getDay()] %> <%=
+        currentDayOfWeek %>
+      </div>
+      <div class="weather_date">
+        <%= date.getDate() %> / <%= date.getMonth()+1 %>
+      </div>
+      <div class="weather_temp">
+        <%= Math.floor(temperature) %><span>°</span>
+      </div>
+
+      <% let weather = element.weather[0]; %>
+      <img
+        src="http://openweathermap.org/img/wn/<%= weather.icon %>@2x.png"
+        alt="<%= weather.description %>"
+      />
+    </div>
+    <% } %> <% }); %>
+  </div>
+</div>

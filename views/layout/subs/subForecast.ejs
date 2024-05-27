@@ -1,0 +1,47 @@
+
+<div class="sub_forecast">
+  <% params=element.main %>
+  <% nextDayParams=nextDayElement.main %>
+  <div class="feels_like">
+    <div class="header">
+      <img src="./images/humidGray.png" alt="" width="22">
+      <div class="name">FEELS LIKE</div>
+    </div>
+    <div class="temp"><%= Math.round(params.feels_like) %>°</div>
+    <% let diff=params.temp-params.feels_like %>
+    <% let text="Humidity is making it feels" %>
+    <div class="desc">
+    <% if(diff!==0){ %>
+      <%= text %>
+      <% }if(diff>0){%>
+      <%= "cooler" %>
+      <% }else{ %>
+      <%= "warmer" %>
+      <% } %>
+    </div>
+  </div>
+  <div class="pressure">
+    <div class="header">
+      <% pressure=params.pressure %>
+      <img src="./images/dropGray<%= pressure<1015 ? "Hallow" :"half "%>.png" alt="" width="22">
+      <div class="name">ATMOS PRESSURE</div>
+    </div>
+    <div class="atmos_pressure"><%= pressure %>&nbsp;hPa</div>
+    <div class="desc"><%= nextDayParams.pressure %>&nbsp;hPa expected in 24h</div>
+  </div>
+  <div class="visibility">
+    <div class="header">
+      <img src="./images/visibilityGray.png" alt="" width="22">
+      <div class="name">VISIBILITY</div>
+    </div>
+    <div class="visible"><%= (element.visibility)/1000 %>&nbsp;kms</div>
+  </div>
+  <div class="humidity">
+    <div class="header">
+      <img src="./images/dewGray.png" alt="" width="22">
+      <div class="name">HUMIDITY</div>
+    </div>
+    <div class="humid"><%= params.humidity %>%</div>
+    <div class="desc"></div>
+  </div>
+</div>

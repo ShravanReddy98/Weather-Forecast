@@ -1,0 +1,22 @@
+
+<div class="current_weather">
+  <%- include("./searchBar.ejs") %>
+  <div class="current_forecast">
+    <% element=data.list[0] %> <% weather=element.weather[0] %>
+    <% nextDayElement=data.list[8] %> <% nextDayWeather=nextDayElement.weather[0] %>
+
+    <main class="main_forecast">
+      <div class="temperature"><%= Math.round(element.main.temp) %>°</div>
+      
+      <div class="weather_main"><%= weather.main %></div>
+      
+      <div class="weather_description"><%= weather.description %></div>
+      <img
+      class="weather_icon"
+      src="http://openweathermap.org/img/wn/<%= weather.icon %>@2x.png"
+      alt="<%= weather.description %>"
+      />
+    </main>
+    <%- include("./subs/subForecast.ejs")  %>
+  </div>
+</div>

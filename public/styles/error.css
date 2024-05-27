@@ -1,0 +1,24 @@
+body{
+    font-size: 1rem;
+    margin: 15px;
+}
+
+.error404,.no_internet{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.header{
+    font-size: 1.5rem;
+}
+.middle{
+    color: rgb(163, 9, 9);
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+.check_connection,.check_spelling{
+    text-align: center;
+    font-size: 2rem;
+}

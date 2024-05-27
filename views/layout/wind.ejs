@@ -1,0 +1,57 @@
+<div class="wind_forecast">
+  <% let winds = data.list[0].wind %>
+  <div class="main">
+    <div class="header">
+      <img src="./images/windWhite.png" alt="Wind Icon" width="22" />
+      <div class="name">WIND</div>
+    </div>
+    <div class="wind">
+      <div class="wind_value"><%= Math.round(winds.speed) %></div>
+      <div class="wind_units">
+        <div class="wind_unit">MPH</div>
+        <div class="wind_head">WIND</div>
+      </div>
+    </div>
+    <hr />
+    <div class="gusts">
+      <div class="gust_value"><%= Math.round(winds.gust) %></div>
+      <div class="gust_units">
+        <div class="gust_unit">MPH</div>
+        <div class="gust_head">GUST</div>
+      </div>
+    </div>
+  </div>
+  <div class="sub_main">
+    <div class="north_west">NW</div>
+    <div class="north">N</div>
+    <div class="north_east">NE</div>
+    <div class="west">W</div>
+    <div class="needle">
+        <img
+        src="./images/image.png"
+        alt="Compass"
+        id="compassImage"
+        data-degree="<%= winds.deg %>"
+        />
+    </div>
+    <div class="east">E</div>
+    <div class="south_west">SW</div>
+    <div class="south">S</div>
+    <div class="south_east">SE</div>
+  </div>
+</div>
+
+<script>
+  // Function to rotate the image based on wind direction degree
+  function rotateImage() {
+    const compassImage = document.getElementById("compassImage");
+    const degree = compassImage.getAttribute("data-degree");
+    compassImage.style.transform = `rotate(${degree-45}deg)`;
+    console.log(`Rotated compass to ${degree-45} degrees`);
+  }
+
+  // Ensure the rotateImage function is called after the image has loaded
+  window.onload = function () {
+    rotateImage();
+  };
+</script>

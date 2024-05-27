@@ -1,0 +1,22 @@
+<div class="search_bar">
+    <div onclick="getWeather()" class="curr_location">
+      <% let hours=new Date(data.list[0].dt_txt).getHours() %>
+      <% let src="./images/" %>
+      <% let color="black" %>
+      <% if((hours>=19 && hours<24)||(hours>=0 && hours<5))color="white" %>
+      <% src+=color %>
+      <img src="<%= src %>Location.png" alt="location" width="25" />
+    </div>
+    <div class="search">
+      <input
+        type="search"
+        class="search"
+        id="location"
+        placeholder="<%= data.city.name %>"
+        autocomplete="off"
+      />
+      <div onclick="cityWeather()" class="city_weather">
+        <img src="<%= src %>Search.png" alt="search" width="25" />
+      </div>
+    </div>
+  </div>

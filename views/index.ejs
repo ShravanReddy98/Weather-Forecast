@@ -1,0 +1,16 @@
+<%- include("./partials/head.ejs") %>
+<% wallData=JSON.stringify(data.list[0]) %>
+<body  wall-data='<%= wallData %>'>
+    <main>
+        <div>
+            <%- include("./layout/currentWeather.ejs") %>
+        </div>
+        <div>
+            <%- include("./layout/5hourForecast.ejs") %>
+            <%- include("./layout/dailyForecast.ejs") %>
+            <%- include("./layout/wind.ejs") %>
+        </div>
+    </main>
+    <%- include("./partials/footer.ejs") %>
+</body>
+</html>
