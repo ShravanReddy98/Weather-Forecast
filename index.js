@@ -2,22 +2,16 @@ import express from 'express';
 import axios from 'axios';
 import bodyParser from 'body-parser';
 import session from 'express-session';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
-import open from 'open'; // Import the open package
 
 const app = express();
-const PORT = process.env.PORT || 5500;
-
-// Set up __dirname
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const PORT = process.env.PORT || 4000;
 
 // Load environment variables
 dotenv.config();
 
 // Get API key from .env
-const API_KEY = "3b31392b088040f744c7a7fb1894f55b";
+const API_KEY = process.env.API_KEY;
 const celcius = "metric";
 
 // Middleware setup
@@ -43,24 +37,25 @@ app.use((req, res, next) => {
   next();
 });
 
-// Route to serve index.html
-app.get("/", (req, res) => {
-  console.log(req.socket.remoteAddress);
-  res.sendFile(path.join(__dirname, "index.html"));
-});
-
-// Route to handle /forecast and render index.ejs
-app.get("/forecast", async (req, res) => {
+// Route to handle root URL and render index.ejs
+app.get("/", async (req, res) => {
   try {
     const params = req.session.params || {
       q: "hyderabad",
       appid: API_KEY,
       units: celcius,
     };
+
+    // Save the default params to session if not already set
+    if (!req.session.params) {
+      req.session.params = params;
+    }
+
     const response = await axios.get(
       `https://api.openweathermap.org/data/2.5/forecast`,
       { params }
     );
+
     res.render("index.ejs", { data: response.data });
   } catch (err) {
     console.error("Failed to make request:", err.message);
@@ -68,11 +63,11 @@ app.get("/forecast", async (req, res) => {
   }
 });
 
-// Other routes to handle current location and city-based forecast
+// Route to handle current location forecast
 app.post("/curr", (req, res) => {
   req.session.lat = req.body.lat;
   req.session.lon = req.body.lon;
-  res.redirect("/curr");
+  res.redirect("/");
 });
 
 app.get("/curr", async (req, res) => {
@@ -83,22 +78,19 @@ app.get("/curr", async (req, res) => {
     units: celcius,
   };
   req.session.params = params;
-  res.redirect("/forecast");
+  res.redirect("/");
 });
 
+// Route to handle city-based forecast
 app.post("/city", (req, res) => {
   const { city, state, countryCode } = req.body.params;
   const q = state && countryCode ? `${city},${state},${countryCode}` : state ? `${city},${state}` : city;
   req.session.params = { q, appid: API_KEY, units: celcius };
-  res.redirect("/city");
+  res.redirect("/");
 });
 
 app.get("/city", (req, res) => {
-  res.redirect("/forecast");
-});
-
-app.get("/index", (req, res) => {
-  res.render("index.ejs", { data: "hi there ,ejs is working" });
+  res.redirect("/");
 });
 
 app.listen(PORT, () => {
