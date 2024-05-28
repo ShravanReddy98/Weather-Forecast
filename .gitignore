@@ -6,6 +6,7 @@ package-lock.json
 views/noInternet.ejs
 public/script/test.js
 public/script/noInternet.js
+weather.json
 
 # Logs
 logs
