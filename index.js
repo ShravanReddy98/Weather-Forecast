@@ -8,7 +8,7 @@ import dotenv from 'dotenv';
 import open from 'open'; // Import the open package
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5500;
 
 // Set up __dirname
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -17,7 +17,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config();
 
 // Get API key from .env
-const API_KEY = 3b31392b088040f744c7a7fb1894f55b;
+const API_KEY = "3b31392b088040f744c7a7fb1894f55b";
 const celcius = "metric";
 
 // Middleware setup
