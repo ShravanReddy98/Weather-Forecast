@@ -7,14 +7,14 @@ import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import open from 'open'; // Import the open package
 
+const app = express();
+const PORT = process.env.PORT || 4000;
+
 // Set up __dirname
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Load environment variables
 dotenv.config();
-
-const app = express();
-const PORT = 5500;
 
 // Get API key from .env
 const API_KEY = 3b31392b088040f744c7a7fb1894f55b;
