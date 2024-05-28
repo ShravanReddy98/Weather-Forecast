@@ -95,5 +95,4 @@ app.get("/city", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server is Running at port:${PORT}.`);
-  open(`http://localhost:${PORT}`); // Open the browser to the specified URL
 });
