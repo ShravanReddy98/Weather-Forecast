@@ -103,7 +103,6 @@ function setWallpaper() {
     console.log( weather);
 
     let url = "../images/backGround/";
-    let defUrl=url;
 
     let strng= time + ".jpg"
     switch (weather) {
@@ -114,13 +113,13 @@ function setWallpaper() {
         url += "cloudy" + strng;
         break;
       case "overcast clouds":
-        url += "overcastCloudy" +  time + ".jpg";
+        url += "overcastCloudy" + strng;
         break;
       case  "scattered clouds":
         url += "scatteredCloudy" + strng;
         break;
       default:
-        defUrl += "clearNight.jpg"; 
+        url += "default"+strng; 
         break;
       }
     console.log('URL:', url);
