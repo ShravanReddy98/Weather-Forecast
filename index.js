@@ -7,10 +7,8 @@ import dotenv from 'dotenv';
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// Load environment variables
+// Load environment variables and API key from .env
 dotenv.config();
-
-// Get API key from .env
 const API_KEY = process.env.API_KEY;
 const celcius = "metric";
 
@@ -23,8 +21,11 @@ app.use(session({
   saveUninitialized: true,
 }));
 
-// Serve static files from the 'public' directory
-app.use(express.static("public"));
+// Enable etag middleware for caching
+app.set('etag', 'strong');
+
+// Serve static files from the 'public' directory and enable caching
+app.use(express.static("public", { maxAge: '1d' }));
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
