@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <%- include("./partials/head.ejs") %>
 <% wallData=JSON.stringify(data.list[0]) %>
 <body  wall-data='<%= wallData %>'>
@@ -12,5 +14,7 @@
         </div>
     </main>
     <%- include("./partials/footer.ejs") %>
-</body>
+    <script src="./script/getWeather.js" type="text/javascript" defer></script>
+  </body>
 </html>
+
