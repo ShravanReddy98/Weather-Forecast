@@ -3,7 +3,6 @@
   <%- include("./searchBar.ejs") %>
   <div class="current_forecast">
     <% element=data.list[0] %> <% weather=element.weather[0] %>
-    <% nextDayElement=data.list[8] %> <% nextDayWeather=nextDayElement.weather[0] %>
 
     <main class="main_forecast">
       <div class="temperature"><%= Math.round(element.main.temp) %>°</div>
