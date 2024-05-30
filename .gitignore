@@ -4,6 +4,7 @@
 node_modules
 package-lock.json
 views/noInternet.ejs
+public/styles/style.css
 public/script/test.js
 public/script/noInternet.js
 weather.json
