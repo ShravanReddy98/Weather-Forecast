@@ -7,7 +7,6 @@ const options = {
 function success(pos) {
   const latitude = pos.coords.latitude;
   const longitude = pos.coords.longitude;
-  console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
 
   // Send a POST request with latitude and longitude
   fetch("/curr", {
@@ -96,10 +95,8 @@ function setWallpaper() {
     else if (hours >= 9 && hours < 17) time = "Day";
     else if (hours >= 17 && hours < 19) time = "Evening";
     else time = "Night";
-    console.log('Time of day:', time);
 
     const weather = data.weather[0].description;
-    console.log( weather);
 
     let url = "../images/backGround/";
 
@@ -121,7 +118,6 @@ function setWallpaper() {
         url += "default"+strng; 
         break;
       }
-    console.log('URL:', url);
 
     bodyElement.style.backgroundImage = `url(${url})`;
     bodyElement.style.backgroundPosition = 'center';
