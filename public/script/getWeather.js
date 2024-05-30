@@ -124,7 +124,6 @@ function setWallpaper() {
     console.log('URL:', url);
 
     bodyElement.style.backgroundImage = `url(${url})`;
-    bodyElement.style.backgroundSize = 'cover';
     bodyElement.style.backgroundPosition = 'center';
   } catch (error) {
     console.error('Error in setWallpaper:', error);
