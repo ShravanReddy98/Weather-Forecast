@@ -1,8 +1,3 @@
-
-document.addEventListener('DOMContentLoaded', (event) => {
-  setWallpaper();
-});
-
 const options = {
   enableHighAccuracy: true,
   timeout: 5000,
@@ -80,6 +75,10 @@ function cityWeather() {
     })
     .catch((error) => console.error("Error:", error));
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  setWallpaper();
+});
 
 
 function setWallpaper() {
